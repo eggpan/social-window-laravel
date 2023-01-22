@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\InquiryRequest;
 
 class InquiryController extends Controller
 {
-    // ここから追加
     public function index()
     {
-        // ここから編集
         return view('index');
-        // ここまで編集
     }
-    // ここまで追加
+
+    public function postInquiry(InquiryRequest $request)
+    {
+        return 'ok';
+    }
 }
