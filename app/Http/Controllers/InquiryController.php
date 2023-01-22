@@ -21,6 +21,8 @@ class InquiryController extends Controller
 
     public function showConfirm(Request $request)
     {
-        dd($request->session()->get('inquiry'));
+        $sessionData = $request->session()->get('inquiry');
+        $message = view('emails.inquiry', $sessionData);
+        return view('confirm', ['message' => $message]);
     }
 }
