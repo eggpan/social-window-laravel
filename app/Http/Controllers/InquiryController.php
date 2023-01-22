@@ -24,6 +24,11 @@ class InquiryController extends Controller
     public function showConfirm(Request $request)
     {
         $sessionData = $request->session()->get('inquiry');
+
+        if (is_null($sessionData)) {
+            return redirect()->route('index');
+        }
+
         $message = view('emails.inquiry', $sessionData);
         return view('confirm', ['message' => $message]);
     }
@@ -31,16 +36,27 @@ class InquiryController extends Controller
     public function postConfirm(Request $request)
     {
         $sessionData = $request->session()->get('inquiry');
+
+        if (is_null($sessionData)) {
+            return redirect()->route('index');
+        }
+
         $request->session()->forget('inquiry');
 
         Mail::to($sessionData['email'])
             ->send(new InquiryMail($sessionData));
 
-        return redirect()->route('sent');
+        return redirect()->route('sent')->with('sent_inquiry', true);;
     }
 
-    public function showSentMessage()
+    public function showSentMessage(Request $request)
     {
+        $request->session()->keep('sent_inquiry');
+        $sessionData = $request->session()->get('sent_inquiry');
+        if (is_null($sessionData)) {
+            return redirect()->route('index');
+        }
+
         return view('sent');
     }
 }
