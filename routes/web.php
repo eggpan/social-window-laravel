@@ -15,7 +15,5 @@ use App\Http\Controllers\InquiryController;
 */
 
 Route::get('/', [InquiryController::class, 'index']);
-
-// ここから追加
 Route::post('inquiry', [InquiryController::class, 'postInquiry'])->name('inquiry');
-// ここまで追加
+Route::get('confirm', [InquiryController::class, 'showConfirm'])->name('confirm');
