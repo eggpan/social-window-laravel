@@ -18,3 +18,4 @@ Route::get('/', [InquiryController::class, 'index'])->name('index');
 Route::post('inquiry', [InquiryController::class, 'postInquiry'])->name('inquiry');
 Route::get('confirm', [InquiryController::class, 'showConfirm'])->name('confirm');
 Route::post('confirm', [InquiryController::class, 'postConfirm'])->name('confirm.post');
+Route::get('sent', [InquiryController::class, 'showSentMessage'])->name('sent');

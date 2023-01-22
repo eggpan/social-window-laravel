@@ -25,4 +25,14 @@ class InquiryController extends Controller
         $message = view('emails.inquiry', $sessionData);
         return view('confirm', ['message' => $message]);
     }
+
+    public function postConfirm(Request $request)
+    {
+        return redirect()->route('sent');
+    }
+
+    public function showSentMessage()
+    {
+        return view('sent');
+    }
 }
