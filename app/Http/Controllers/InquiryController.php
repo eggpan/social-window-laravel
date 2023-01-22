@@ -9,7 +9,9 @@ class InquiryController extends Controller
     // ここから追加
     public function index()
     {
-        return 'hello world!';
+        // ここから編集
+        return view('index');
+        // ここまで編集
     }
     // ここまで追加
 }
