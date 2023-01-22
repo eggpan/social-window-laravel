@@ -25,13 +25,21 @@ class InquiryRequest extends FormRequest
      */
     public function rules()
     {
-        // ここから編集
         return [
             'name'         => ['required', 'string'],
             'email'        => ['required', 'email'],
             'relationship' => ['required', Rule::in(config('relationship'))],
             'content'      => ['required', 'string'],
         ];
-        // ここまで編集
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'お名前',
+            'email' => 'メールアドレス',
+            'relationship' => '社会の窓が空いている人との関係',
+            'content' => '何か伝えたいこと',
+        ];
     }
 }
