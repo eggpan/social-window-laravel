@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InquiryMail;
 use App\Http\Requests\InquiryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class InquiryController extends Controller
 {
@@ -28,6 +30,12 @@ class InquiryController extends Controller
 
     public function postConfirm(Request $request)
     {
+        $sessionData = $request->session()->get('inquiry');
+        $request->session()->forget('inquiry');
+
+        Mail::to($sessionData['email'])
+            ->send(new InquiryMail($sessionData));
+
         return redirect()->route('sent');
     }
 
